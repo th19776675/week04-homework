@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Quiz</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    
+    <header>
+        <button class="high-btn">View Highscores</button>
+        <p>Time : 1</p>
+    </header>
+
+    <main>
+        <section id="start" style="display:block;" >
+            <h1>Coding Quiz Challenge</h1>
+            <p>
+                The following quiz will test you on your knowledge of the fundamentals of Javascript.
+                <br>
+                Be careful! A wrong answer will subtract 5 seconds from the timer.
+            </p>
+            <button class="start-btn">Start!</button>
+        </section>
+
+        <section id="questions" style="display:none;">
+            <h2>Blank Question</h2>
+
+            <button class="answer-btn" data-id="A">A</button>
+            <button class="answer-btn" data-id="B">B</button>
+            <button class="answer-btn" data-id="C">C</button>
+            <button class="answer-btn" data-id="D">D</button>
+            <div class="answer">
+                Answer
+            </div>
+        </section>
+
+        <section id="scoring" style="display:none;">
+            <h2>Congratulations!</h2>
+            <form>
+                <input type="text" name="user" id="user" placeholder="Enter Username">
+                <input type="submit">
+            </form>
+        </section>
+
+        <section id="end" style="display:none;">
+            <h2>Highscores</h2>
+            <ul>
+                <li>Test</li>
+                <li>Test</li>
+                <li>Test</li>
+                <li>Test</li>
+            </ul>
+            <button class="reset-btn">Reset Scores</button>
+            <button class="replay-btn">Play Again</button>
+        </section>
+    </main>
+
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
