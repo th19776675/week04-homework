@@ -43,9 +43,10 @@ h2 {
     line-height: 4rem;
 }
 
-main button {
+main button, form {
     margin: 25px 0;
 }
+
 
 /* Class Selectors */
 

@@ -12,7 +12,7 @@
     
     <header>
         <button class="high-btn">View Highscores</button>
-        <p>Time : 1</p>
+        <p id="timer"></p>
     </header>
 
     <main>
@@ -27,7 +27,7 @@
         </section>
 
         <section id="questions" style="display:none;">
-            <h2>Blank Question</h2>
+            <h2 id="question">Blank Question</h2>
 
             <button class="answer-btn" data-id="A">A</button>
             <button class="answer-btn" data-id="B">B</button>
@@ -39,9 +39,10 @@
         </section>
 
         <section id="scoring" style="display:none;">
-            <h2>Congratulations!</h2>
+            <h2 id="scoring-msg"></h2>
+            <p id="scoring-caption"></p>
             <form>
-                <input type="text" name="user" id="user" placeholder="Enter Username">
+                <input type="text" name="user" id="user-input" placeholder="Enter Username">
                 <input type="submit">
             </form>
         </section>
@@ -49,10 +50,7 @@
         <section id="end" style="display:none;">
             <h2>Highscores</h2>
             <ul>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
-                <li>Test</li>
+
             </ul>
             <button class="reset-btn">Reset Scores</button>
             <button class="replay-btn">Play Again</button>
