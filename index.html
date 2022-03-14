@@ -11,52 +11,67 @@
 <body>
     
     <header>
-        <button class="high-btn">View Highscores</button>
+        <button class="high-btn ">View Highscores</button>
+        <button class="close-btn " style = "display: none;">Exit Highscores</button>
         <p id="timer"></p>
     </header>
 
     <main>
         <section id="start" style="display:block;" >
-            <h1>Coding Quiz Challenge</h1>
-            <p>
-                The following quiz will test you on your knowledge of the fundamentals of Javascript.
-                <br>
-                Be careful! A wrong answer will subtract 5 seconds from the timer.
-            </p>
-            <button class="start-btn">Start!</button>
+            <div class="container">
+                <h1>Coding Quiz Challenge</h1>
+                <p>
+                    The following quiz will test you on your knowledge of the fundamentals of Javascript.
+                    <br>
+                    Be careful! A wrong answer will subtract 10 seconds from the timer.
+                </p>
+                <button class="start-btn ">Start!</button>
+            </div>
         </section>
 
         <section id="questions" style="display:none;">
-            <h2 id="question">Blank Question</h2>
-
-            <button class="answer-btn" data-id="A">A</button>
-            <button class="answer-btn" data-id="B">B</button>
-            <button class="answer-btn" data-id="C">C</button>
-            <button class="answer-btn" data-id="D">D</button>
-            <div class="answer">
-                Answer
+            <div class="container">
+                <h2 id="question">Blank Question</h2>
+    
+                <button class="answer-btn " data-id="A">A</button>
+                <button class="answer-btn " data-id="B">B</button>
+                <button class="answer-btn " data-id="C">C</button>
+                <button class="answer-btn " data-id="D">D</button>
+                <div class="answer"> </div>
             </div>
         </section>
 
         <section id="scoring" style="display:none;">
-            <h2 id="scoring-msg"></h2>
-            <p id="scoring-caption"></p>
-            <form>
-                <input type="text" name="user" id="user-input" placeholder="Enter Username">
-                <input type="submit">
-            </form>
+            <div class="container">
+                <h2 id="scoring-msg"></h2>
+                <p id="scoring-caption"></p>
+                <form>
+                    <input type="text" name="user" id="user-input" placeholder="Enter Username">
+                    <input type="submit">
+                </form>
+            </div>
         </section>
 
         <section id="end" style="display:none;">
-            <h2>Highscores</h2>
-            <ul>
+            <div class="container">
+                <h2>Highscores</h2>
+                <ul id="end-list">
 
-            </ul>
-            <button class="reset-btn">Reset Scores</button>
-            <button class="replay-btn">Play Again</button>
+                </ul>
+                <button class="reset-btn">Reset Scores</button>
+                <button class="replay-btn">Play Again</button>
+            </div>
         </section>
-    </main>
 
+    </main>
+    
+    <section id="high-scores" style="display:none";>
+        <div class="high-container">
+            <ul id="high-list">
+                
+            </ul>
+        </div>
+    </section>
 
     <script src="assets/js/main.js"></script>
 </body>

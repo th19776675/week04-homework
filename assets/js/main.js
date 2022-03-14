@@ -6,11 +6,16 @@ let timeLeft = 0;
 let currentScore = 0;
 const startBtn = document.querySelector(".start-btn");
 
+const highBtn = document.querySelector(".high-btn")
+const closeBtn = document.querySelector(".close-btn")
+
+const main = document.querySelector("main");
 const startSection = document.querySelector("#start");
 const questionsSection = document.querySelector("#questions");
 const scoringSection = document.querySelector("#scoring");
 const endSection = document.querySelector("#end");
 const timer = document.querySelector("#timer")
+const highScores = document.querySelector("#high-scores")
 
 let currentQuestion = 0
 let question = document.querySelector("#question")
@@ -25,7 +30,9 @@ const scoringCaption = document.querySelector("#scoring-caption")
 const userInput = document.querySelector("#user-input")
 const userForm = document.querySelector("form")
 
-const scoreList = document.querySelector("ul")
+const scoreList = document.querySelector("#end-list")
+const highList = document.querySelector("#high-list")
+
 
 const replayBtn = document.querySelector(".replay-btn");
 const resetBtn = document.querySelector(".reset-btn");
@@ -41,17 +48,17 @@ function changeSlide(hide, show) {
 
 // Generate Question Order
 const questionList = [
-    {question: "Test0", answerA:"Loremg", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "B"},
-    {question: "Test1", answerA:"Lorem4", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "C"},
-    {question: "Test2", answerA:"Lorem436", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "A"},
-    {question: "Test3", answerA:"Lorem4", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "C"},
-    {question: "Test4", answerA:"Loremy", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "B"},
-    {question: "Test5", answerA:"Loremuu", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "B"},
-    {question: "Test6", answerA:"Loremh", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "A"},
-    {question: "Test7", answerA:"Loremg", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "D"},
-    {question: "Test8", answerA:"Loremd", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "D"},
-    {question: "Test9", answerA:"Loremk", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "B"},
-    {question: "Test10", answerA:"dfg", answerB: "Ipsum", answerC:"Yed", answerD: "Test2", correctAnswer: "C"},
+    {question: "Inside which HTML element do we put the JavaScript?", answerA:"<js>", answerB: "<sript>", answerC:"<scripting>", answerD: "<javacript>", correctAnswer: "B"},
+    {question: "Determine the result - String(“Hello”) === “Hello”;", answerA:"True", answerB: "False", answerC:"SyntaxError", answerD: "Reference Error", correctAnswer: "A"},
+    {question: "What is the correct JavaScript syntax to print “DataFlair” in the console?", answerA:" print(“DataFlair”);", answerB: "console.print(“DataFlair”);", answerC:"log.console(“DataFlair”);", answerD: "console.log(“DataFlair”);", correctAnswer: "D"},
+    {question: "Which of the following print content on the browser window?", answerA:"document.write(“print content”);", answerB: "response.write(“print content”);", answerC:"document.write(print content);", answerD: "write(“print content”);", correctAnswer: "C"},
+    {question: "Which method will you use to round the number 24.76 to the nearest integer?", answerA:"round(24.76);", answerB: "rnd(24.76);", answerC:"Math.round(24.76);", answerD: "Math.rnd(24.76);", correctAnswer: "C"},
+    {question: "Which of the following statements will show a message as well as ask for user input in a popup?", answerA:"alert()", answerB: "prompt()", answerC:"confirm()", answerD: "message()", correctAnswer: "B"},
+    {question: "Which of the following is an event listener in JavaScript?", answerA:"onclick", answerB: "blur", answerC:"click", answerD: "click()", correctAnswer: "C"},
+    {question: "What are the advantages that JavaScript provides for forms?", answerA:"Bandwidth conservation", answerB: "Form validation", answerC:"Increased user satisfaction", answerD: "All of the above", correctAnswer: "D"},
+    {question: "What is the syntax of a “for” statement in JavaScript?", answerA:"for(increment; condition; initialization)", answerB: "for(initialization, condition, increment)", answerC:"for(condition; initialization; increment)", answerD: "for(initialization; condition; increment)", correctAnswer: "D"},
+    {question: "Which of the given options is an incorrect variable name?", answerA:"javascript", answerB: " _javascript", answerC:"$javascript", answerD: "-javascript", correctAnswer: "D"},
+    {question: "How do you find the minimum of x and y using JavaScript?", answerA:"min(x,y);", answerB: "Math.min(x,y)", answerC:"Math.min(xy)", answerD: "min(xy);", correctAnswer: "B"},
 ]
 
 function generateNewQuestionOrder() {
@@ -74,13 +81,13 @@ let questionsTimer = null;
 
 function startTimer() {
     timeLeft = 60
-    timer.innerHTML = "Time Left : " + timeLeft
+    timer.textContent = "Time Left : " + timeLeft
     console.log(timeLeft)
     questionsTimer = setInterval(function(){
-        timer.innerHTML = "Time Left : " + timeLeft.toFixed(1)
+        timer.textContent = "Time Left : " + timeLeft.toFixed(1)
         if (timeLeft < 0) {
-            clearInterval()
-            timer.innerHTML = ""
+            clearInterval(questionsTimer)
+            timer.textContent = ""
             changeSlide(questionsSection, scoringSection)
             scoringMsg.textContent = "Oh No!"
             scoringCaption.textContent = "Sorry you ran out of time."
@@ -96,12 +103,18 @@ function fillQuestions(){
     console.log(questionList[questionOrder[currentQuestion]])
     if (questionList[questionOrder[currentQuestion]] != undefined) {
         let questionNumber = questionOrder[currentQuestion];
-        question.innerHTML = questionList[questionNumber].question;
-        answerA.innerHTML = "A - " + questionList[questionNumber].answerA;
-        answerB.innerHTML = "B - " + questionList[questionNumber].answerB;
-        answerC.innerHTML = "C - " + questionList[questionNumber].answerC;
-        answerD.innerHTML = "D - " + questionList[questionNumber].answerD;
+        question.textContent = questionList[questionNumber].question;
+        answerA.textContent = questionList[questionNumber].answerA;
+        answerB.textContent = questionList[questionNumber].answerB;
+        answerC.textContent = questionList[questionNumber].answerC;
+        answerD.textContent = questionList[questionNumber].answerD;
     }   
+}
+
+const answerBox = document.querySelector(".answer")
+
+function printAnswer(answer) {
+    answerBox.textContent = answer
 }
 
 function checkAnswer(event) {
@@ -110,11 +123,14 @@ function checkAnswer(event) {
             console.log("Correct!")
             currentScore++
             timeLeft = timeLeft + 5
+            printAnswer("Correct!")
         } else {
-            timeLeft = timeLeft - 5
+            timeLeft = timeLeft - 10
+            printAnswer("Incorrect!")
         }
     }
 }
+
 
 function startQuiz() {
     startTimer()
@@ -125,7 +141,7 @@ function startQuiz() {
                 changeSlide(questionsSection, scoringSection)
                 scoringMsg.textContent = "Congratulations!"
                 scoringCaption.textContent = "You finished all the questions."
-                timer.innerHTML = ""
+                timer.textContent = ""
                 clearInterval(questionsTimer)
             }
             currentQuestion++;
@@ -146,19 +162,31 @@ startBtn.addEventListener("click", function(){
 
 let savedScores = []
 
-function renderScores() {
+function renderScores(list) {
     for (let i = 0; i < savedScores.length; i++){
         let savedScore = savedScores[i];
-    
+        console.log("Test")
         const score = document.createElement("li");
         score.textContent = `Name: ${savedScore.userName} | Score: ${savedScore.userScore}/${savedScore.questionLength} | Time Left: ${savedScore.userTime} Seconds`
     
-        scoreList.appendChild(score);
+        list.appendChild(score);
     }
 }
-    
+
+function checkNeg(number) {
+    if (number <= 0) {
+        return 0;
+    } else {
+        return number;
+    }
+}
+
 userForm.addEventListener("submit", function(event){
     event.preventDefault();
+    if (userInput.value == "") {
+        return
+    }
+    scoringSection.style.display = "none";
     if (JSON.parse(localStorage.getItem("localSavedScores")) !== null) {
         savedScores = JSON.parse(localStorage.getItem("localSavedScores"))
     }
@@ -166,13 +194,14 @@ userForm.addEventListener("submit", function(event){
         userName: userInput.value.trim(),
         userScore: currentScore,
         questionLength: questionList.length,
-        userTime: timeLeft.toFixed(1)
+        userTime: checkNeg(timeLeft.toFixed(1))
     }
     savedScores.push(userData)
     console.log(savedScores)
     localStorage.setItem("localSavedScores", JSON.stringify(savedScores))
+    
     changeSlide(scoringSection, endSection)
-    renderScores()
+    renderScores(scoreList)
 })
 
 resetBtn.addEventListener("click", function(){
@@ -185,4 +214,27 @@ resetBtn.addEventListener("click", function(){
 
 replayBtn.addEventListener("click", function(){
     location.reload()
+})
+
+highBtn.addEventListener("click", function(){
+    console.log("Click")
+    if (JSON.parse(localStorage.getItem("localSavedScores")) !== null) {
+        savedScores = JSON.parse(localStorage.getItem("localSavedScores"))
+        renderScores(highList)
+    } 
+
+    closeBtn.style.display = "block"
+    highBtn.style.display = "none"
+    highScores.style.display = "flex"
+    main.style.filter = "blur(5px)"
+})
+
+closeBtn.addEventListener("click", function(){
+    while (highList.hasChildNodes()) {
+        highList.removeChild(highList.firstChild);
+      }
+    highBtn.style.display = "block"
+    closeBtn.style.display = "none"
+    highScores.style.display = "none"
+    main.style.filter = "blur(0px)"
 })
